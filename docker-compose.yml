@@ -1,0 +1,22 @@
+version: '3'
+services:
+  statsd:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: oozou-statsd
+    restart: always
+    environment:
+      NODE_ENV: development
+  graphite:
+    image: graphiteapp/graphite-statsd
+    container_name: oozou-graphite
+    environment:
+      COLLECTD: 1
+      GRAPHITE_DEBUG: 1
+      REDIS_TAGDB: 1
+      BRUBECK: 1
+    expose: 
+      - 80
+    links:
+      - statsd
