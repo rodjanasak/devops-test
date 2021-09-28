@@ -9,7 +9,7 @@ terraform {
 }
 
 locals {
-  rg_location_shortcut    = lookup(var.location_mapping, var.rg_location)
+  rg_location_shortcut = lookup(var.location_mapping, var.rg_location)
 }
 
 # Configure the Microsoft Azure Provider
@@ -22,16 +22,15 @@ provider "azurerm" {
 }
 
 module "resourcegroup" {
-  count             = var.rg_exist == "n" ? 1 : 0
   source            = "./modules/resourcegroup"
   location          = var.rg_location
   location_shortcut = local.rg_location_shortcut
   project           = var.project_name
 
   tags = {
-    "rg.serviceId"     = "Azure Web App",
-    "rg.env"    = var.environment == "p" ? "Prod" : "Non-prod",
-    "rg.owner"  = var.owned_by
+    "rg.serviceId" = "Azure Web App",
+    "rg.env"       = var.environment == "p" ? "Prod" : "Non-prod",
+    "rg.owner"     = var.owned_by
   }
 }
 

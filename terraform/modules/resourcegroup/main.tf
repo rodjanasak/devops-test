@@ -5,7 +5,7 @@ module "naming" {
 }
 
 
-resource "azurerm_resource_group" "rgp" {
+resource "azurerm_resource_group" "rg" {
   name     = module.naming.resource_group
   location = var.location
   tags     = var.tags

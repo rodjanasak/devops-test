@@ -1,9 +1,4 @@
 ## General Info ##
-variable "rg_exist" {
-  description = "Check whether resource group are exist."
-  default     = "n"
-}
-
 variable "location_mapping" {
   description = "mapping for location"
   default = {
@@ -18,6 +13,11 @@ variable "location_mapping" {
     "germanywestcentral" = "gwc1",
     "southeastasia"      = "sea1"
   }
+}
+
+variable "rg_name" {
+  description = "default resource group name"
+  default     = "rg-sea1-oozou_rodjanasak"
 }
 
 variable "rg_location" {
