@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnet_name": {
+            "type": "String"
+        },
+        "vnet_location": {
+            "type": "String"
+        },
+         "vnet_addr": {
+            "type": "String"
+        },
+        "vnet_addressSpace": {
+            "type": "Array"
+        },
+        "subnet_name": {
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('vnet_name')]",
+            "location": "[parameters('vnet_location')]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": 
+                       "[parameters('vnet_addressSpace')]"
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('subnet_name')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('vnet_addr')]",
+                            "serviceEndpoints": [],
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
